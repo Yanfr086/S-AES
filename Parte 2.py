@@ -1,13 +1,3 @@
-'''
-Implementação em Python do S-AES no modo ECB
- - Tamanho do bloco: 16 bits (2x2 nibbles)
- - Tamanho da chave: 16 bits
- - Número de rodadas: 2
- - Função auxiliar encrypt_saes_ecb(msg, key) retorna bytes do ciphertext
- - Exibe saída em Base64
- - Demonstra fraqueza do modo ECB: blocos idênticos geram ciphertexts idênticos
-'''
-
 import base64
 from typing import List
 
