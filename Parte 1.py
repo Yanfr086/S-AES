@@ -1,13 +1,3 @@
-'''
-Implementação em Python do S-AES (Simplified AES)
- - Tamanho do bloco: 16 bits (2x2 nibbles)
- - Tamanho da chave: 16 bits
- - Número de rodadas: 2
- - I/O no terminal: leitura de plaintext & chave, exibição de ciphertext em hex e Base64
- - Impressão de estados intermediários após cada função/rodada
- - Comparar S-AES vs AES oficial (NIST.FIPS.197)
-'''
-
 import sys
 import base64
 
