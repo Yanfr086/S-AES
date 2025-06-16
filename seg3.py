@@ -80,12 +80,32 @@ def aes_ctr(msg: bytes, key: bytes, nonce: bytes) -> bytes:
 # ============================
 
 modos = [
-    ("ECB", aes_ecb,      (mensagem_bytes, chave),     "Não", "Vulnerável a padrões repetitivos."),
-    ("CBC", aes_cbc,      (mensagem_bytes, chave, iv), "Sim",  "Encadeamento protege contra padrões."),
-    ("CFB", aes_cfb,      (mensagem_bytes, chave, iv), "Sim",  "Adequado para streaming, sem padding."),
-    ("OFB", aes_ofb,      (mensagem_bytes, chave, iv), "Sim",  "Resistente a erros de transmissão."),
-    ("CTR", aes_ctr,      (mensagem_bytes, chave, nonce), "Sim (nonce)", "Paralelizável e seguro."),
+    ("ECB", aes_ecb,
+     (mensagem_bytes, chave),
+     "Não",
+     "Modo mais simples: sem IV nem aleatoriedade. Blocos idênticos → cifras idênticas; vulnerável a padrões repetitivos."),
+
+    ("CBC", aes_cbc,
+     (mensagem_bytes, chave, iv),
+     "Sim",
+     "Cada bloco é XOR-ado com o anterior (ou IV no primeiro), ocultando padrões. IV único garante aleatoriedade inicial."),
+
+    ("CFB", aes_cfb,
+     (mensagem_bytes, chave, iv),
+     "Sim",
+     "Cifra de fluxo derivada de CBC: sem padding, converte AES em streaming, ideal para dados em tempo real."),
+
+    ("OFB", aes_ofb,
+     (mensagem_bytes, chave, iv),
+     "Sim",
+     "Gera keystream independente do texto, resistente a falhas de transmissão, não expande o tamanho dos dados."),
+
+    ("CTR", aes_ctr,
+     (mensagem_bytes, chave, nonce),
+     "Sim (nonce)",
+     "Conta interna (contador+nonce) produz keystream paralelizável; nonce impede reutilização do mesmo fluxo cifrante.")
 ]
+
 
 print(f"Mensagem teste: “{mensagem}”")
 print(f"Chave AES-128: {chave!r}")
